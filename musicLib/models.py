@@ -18,11 +18,12 @@ class contact(models.Model):
     contact_phone = models.IntegerField()
     contact_message = models.TextField()
 
-# def customer(models.Models):
-#     f_name
-#     m_name
-#     l_name
-#     dob
-#     phone
-#     email
-#     gender
+
+class customer(models.Model):
+    f_name = models.CharField(max_length=200)
+    m_name = models.CharField(max_length=200)
+    l_name = models.CharField(max_length=200)
+    dob = models.DateField()
+    phone = models.CharField(max_length=200)
+    email = models.EmailField()
+    gender = models.CharField(max_length=20)
