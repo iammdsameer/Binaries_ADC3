@@ -1,5 +1,5 @@
 from django.db import models
-from musicLib import models as uModel
+from musicLib.models import customer
 
 
 
