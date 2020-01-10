@@ -1,0 +1,12 @@
+{%extends 'musicLib/base.html'%}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+name is: {{ user.username }}
+{% else %}
+login please
+{% endif %}
+
+{% endblock %}
+
