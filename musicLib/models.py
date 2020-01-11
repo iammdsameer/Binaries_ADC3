@@ -8,7 +8,11 @@ class music(models.Model):
     music_artist = models.CharField(max_length=200)
     music_length = models.CharField(max_length=200)
     music_album = models.CharField(max_length=200)
-   # music_coverArt = models.ImageField(upload_to='Cover_Art')
+    music_coverArt = models.CharField(max_length=2083, default='https://bit.ly/2FDO3LI')
+    #file = models.FileField(upload_to='musics/', blank =True)
+    #<audio src="{{ song.file.url }}" controls></audio>
+    #input url of image
+    #music_file = models.Music... 
     date_added = datetime.datetime.now()
 
 

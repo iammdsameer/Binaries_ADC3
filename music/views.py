@@ -1,7 +1,11 @@
 from django.shortcuts import render
 
+
 def music(request):
     return render(request,'music/music.html')
+
+def upload(request):
+    return render(request,'music/upload.html')
 
 def playMusic(request):
     
@@ -17,3 +21,4 @@ def changeMusic(request):
     #next music
     #prev music
     pass
+
