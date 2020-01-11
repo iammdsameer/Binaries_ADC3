@@ -24,3 +24,6 @@ class Music(models.Model):
 
     def __str__(self):
         return self.music_title
+
+    def double_check_values(self):
+        return True

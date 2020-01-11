@@ -1,18 +1,49 @@
 {%extends 'musicLib/base.html'%} {% block content %}
-
-<form method="POST">
-    {% csrf_token %}
-    <div class="col">
+<br />
+<br />
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
         <!-- Search form -->
         <div class="md-form mt-0">
             <input
                 class="form-control"
                 type="text"
+                name="search_tag"
                 placeholder="Search"
                 aria-label="Search"
-                name="search_tag"
             />
+            <br />
+            <button class="btn btn-primary" type="submit">Search</button>
+            <br />
         </div>
-    </div>
-</form>
-{% endblock %}
+    </form>
+
+    {%for m in result%}
+
+    <ul class="list-group" style="width:500px; margin-left:30%">
+        <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+        >
+            {{m.music_title}}
+            <span>{{m.music_length}} M</span> &nbsp;&nbsp;&nbsp;
+            <img
+                src="{{m.music_coverArt}}"
+                class="rounded float-left"
+                alt="No Image Found"
+                style="width: 50px;height: 50px;"
+            />
+            <span class="badge badge-primary badge-pill">Play</span>
+        </li>
+    </ul>
+</div>
+
+{%endfor%} {%if not data and not result%}
+
+<br />
+<div class="alert alert-danger" role="alert">
+    Sorry
+</div>
+
+<br />
+{%endif%} {% endblock %}
