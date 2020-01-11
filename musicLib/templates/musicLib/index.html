@@ -1,12 +1,18 @@
-{%extends 'musicLib/base.html'%}
+{%extends 'musicLib/base.html'%} {% block content %}
 
-{% block content %}
-
-{% if user.is_authenticated %}
-name is: {{ user.username }}
-{% else %}
-login please
-{% endif %}
-
+<form method="POST">
+    {% csrf_token %}
+    <div class="col">
+        <!-- Search form -->
+        <div class="md-form mt-0">
+            <input
+                class="form-control"
+                type="text"
+                placeholder="Search"
+                aria-label="Search"
+                name="search_tag"
+            />
+        </div>
+    </div>
+</form>
 {% endblock %}
-
