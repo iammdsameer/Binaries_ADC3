@@ -1,0 +1,25 @@
+{%extends 'musicLib/base.html'%} {%block content%} {%if user.is_authenticated%}
+{%for m in music%}
+<div style=" float:left; margin: 20px;">
+    <div class="card" style="width: 18rem;">
+        <img
+            class="card-img-top"
+            src="{{m.music_coverArt}}"
+            alt="Card image cap"
+        />
+        <div class="card-body">
+            <h5 class="card-title">{{m.music_title}}</h5>
+            <p class="card-text">{{m.music_artist}}</p>
+            <p class="card-text">{{m.music_length}} M</p>
+            &nbsp;
+            <form method="post">
+                {% csrf_token %}
+            <button type="submit" class="btn btn-danger" name = "id" value="{{m.id}}">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+
+    {%endfor%} {%endif%} {%endblock%}
+</div>
