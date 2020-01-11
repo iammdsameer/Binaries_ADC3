@@ -13,13 +13,12 @@ class Album(models.Model):
 
 class Music(models.Model):
     # How to use
-     #music_album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    music_length = models.FloatField(null=True)
+    # album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    music_length = models.IntegerField(null = True)
     music_title = models.CharField(max_length=250)
     music_file = models.FileField(default='')
-    music_coverArt = models.CharField(max_length=2083, default='https://bit.ly/2FDO3LI')
-    #music_coverArt = models.ImageField(upload_to='media/')
-    music_file = models.FileField(upload_to='musics/', blank =True)
+    
+    music_coverArt = models.CharField(max_length=2083, default="https://i.ytimg.com/vi/5Peo-ivmupE/maxresdefault.jpg")
 
     def __str__(self):
         return self.music_title

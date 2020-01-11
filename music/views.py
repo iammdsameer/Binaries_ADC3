@@ -12,7 +12,7 @@ def upload(request):
     if request.method == 'POST':
         music_title = request.POST['music_title']
         music_length = request.POST['music_length']
-        #music_album = request.POST['music_album']
+        # music_album = request.POST['music_album']
         music_coverArt = request.POST['music_coverArt']
         music_file = request.POST['music_file']
         upload = Music(music_title=music_title, music_coverArt=music_coverArt, music_file=music_file, music_length=music_length)
