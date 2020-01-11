@@ -1,4 +1,4 @@
-{%extends 'musicLib/base.html'%} {%block content%}
+{%extends 'musicLib/base.html'%} {%block content%} {%if user.is_authenticated%}
 <div class="container" style="width:600px;margin-top:50px">
     <h4 class="h4">Upload New Music</h4>
     <p class="lead" style="font-size: 15px;">
@@ -27,7 +27,7 @@
         <br />
         <div class="col">
             <input
-                type="text"
+                type="number"
                 class="form-control"
                 placeholder="Music Length"
                 name="music_length"
@@ -60,7 +60,18 @@
                 name="music_file"
             />
         </div>
+        <div class="col">
+            <button
+                style="margin-top: 10px;"
+                type="submit"
+                class="btn btn-success"
+            >
+                Upload
+            </button>
+        </div>
     </form>
 </div>
-
-{% endblock%}
+{%else%}
+<p>Please login in order to upload music</p>
+<a class="nav-link" href="../user/login">Login</a>
+{%endif%} {% endblock%}
