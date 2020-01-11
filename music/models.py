@@ -17,6 +17,8 @@ class Music(models.Model):
     music_length = models.IntegerField(null = True)
     music_title = models.CharField(max_length=250)
     music_file = models.FileField(default='')
+    music_artist = models.CharField(max_length=250, null = True)
+    music_album = models.CharField(max_length=250, null=True)
     
     music_coverArt = models.CharField(max_length=2083, default="https://i.ytimg.com/vi/5Peo-ivmupE/maxresdefault.jpg")
 
