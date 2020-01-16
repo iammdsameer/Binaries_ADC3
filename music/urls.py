@@ -7,7 +7,7 @@ from django.conf.urls import url
 app_name = "music"
 
 urlpatterns = [
-   path('', views.music, name="music"),
+   path('', views.index, name="homepage"),
    path('upload/',views.upload,name = "upload_music"),
    path('del/',views.deleteMusic,name = 'manage'),
    path('edit/',views.editMusic,name = 'manage'),

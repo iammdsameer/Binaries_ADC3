@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Album(models.Model):
+class Albums(models.Model):
     artist = models.CharField(max_length=250)
     album_title = models.CharField(max_length=500)
     genre = models.CharField(max_length=100)
@@ -11,7 +11,7 @@ class Album(models.Model):
         return self.album_title + ' - ' + self.artist
 
 
-class Music(models.Model):
+class Musics(models.Model):
     # How to use
     # album = models.ForeignKey(Album, on_delete=models.CASCADE)
     music_length = models.IntegerField(null = True)
