@@ -5,20 +5,13 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 
-
-# index contains all the searching function and displaying songs stored in database with different sorting functions
 def index(request):
     music = Musics.objects.all()
-    result =[]
-    search_tag = ''
+    if request.GET:
+        query = request.GET['q']
+        music = get_data_queryset(str(query))
 
-#Search for particular song with artist, music_title and album name
-
-    if search_tag in request.GET:
-        search_tag = request.GET['search_tag']
-        result = Musics.objects.filter(Q(music_title__contains=search_tag) | Q(music_album__contains=search_tag) | Q(music_artist__contains=search_tag))
-    return render(request, 'music/index.html',{'music': music, 'result': result})
-
+    return render(request, 'music/index.html', {'musics': music})
 
 # only a logged in user can
 def upload(request):
@@ -75,13 +68,6 @@ def changeMusic(request):
     pass
 
 
-def search_music(request):
-    music = Musics.objects.all()
-    if request.GET:
-        query = request.GET['q']
-        music = get_data_queryset(str(query))
-
-    return render(request, 'music/search.html', {'musics': music})
 
 def get_data_queryset(query=None):
     queryset = []

@@ -11,5 +11,4 @@ urlpatterns = [
    path('upload/',views.upload,name = "upload_music"),
    path('del/',views.deleteMusic,name = 'manage'),
    path('edit/',views.editMusic,name = 'manage'),
-   path('search/', views.search_music, name = 'search')
 ]
