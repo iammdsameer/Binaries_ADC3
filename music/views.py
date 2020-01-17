@@ -9,7 +9,7 @@ from django.db.models import Q
 # index contains all the searching function and displaying songs stored in database with different sorting functions
 def index(request):
     music = Musics.objects.all()
-    result ={}
+    result =[]
     search_tag = ''
 
 #Search for particular song with artist, music_title and album name
@@ -17,10 +17,7 @@ def index(request):
     if search_tag in request.GET:
         search_tag = request.GET['search_tag']
         result = Musics.objects.filter(Q(music_title__contains=search_tag) | Q(music_album__contains=search_tag) | Q(music_artist__contains=search_tag))
-    else:
-        search_tag = False
-    
-    return render(request,'music/index.html',{'music':music, 'result':result})
+    return render(request, 'music/index.html',{'music': music, 'result': result})
 
 
 # only a logged in user can
@@ -77,3 +74,24 @@ def changeMusic(request):
     #prev music
     pass
 
+
+def search_music(request):
+    music = Musics.objects.all()
+    if request.GET:
+        query = request.GET['q']
+        music = get_data_queryset(str(query))
+
+    return render(request, 'music/search.html', {'musics': music})
+
+def get_data_queryset(query=None):
+    queryset = []
+    queries = query.split(' ')
+    for q in queries:
+        music = Musics.objects.filter(
+            Q(music_title__icontains = q) |
+            Q(music_artist__icontains = q) | Q(music_album__icontains = q)
+        )
+
+        for m in music:
+            queryset.append(m)
+    return list(set(queryset))
