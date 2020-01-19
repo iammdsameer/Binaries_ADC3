@@ -21,7 +21,7 @@ def upload(request):
         music_length = request.POST['music_length']
         music_album = request.POST['music_album']
         music_coverArt = request.POST['music_coverArt']
-        music_file = request.POST['music_file']
+        music_file = request.FILES['music_files']
         upload = Musics(music_title=music_title,music_artist=music_artist, music_album=music_album,music_coverArt=music_coverArt, music_file=music_file, music_length=music_length)
         upload.save()
         return HttpResponse('File Uploaded')

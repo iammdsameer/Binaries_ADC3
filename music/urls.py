@@ -12,3 +12,4 @@ urlpatterns = [
    path('del/',views.deleteMusic,name = 'manage'),
    path('edit/',views.editMusic,name = 'manage'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

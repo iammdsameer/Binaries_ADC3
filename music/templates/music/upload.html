@@ -5,7 +5,7 @@
         Upload music of your choice.
     </p>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col">
             <input
@@ -57,7 +57,7 @@
                 type="file"
                 class="form-control"
                 placeholder="Upload Music File Here"
-                name="music_file"
+                name="music_files"
             />
         </div>
         <div class="col">

@@ -16,7 +16,7 @@ class Musics(models.Model):
     # album = models.ForeignKey(Album, on_delete=models.CASCADE)
     music_length = models.IntegerField(null = True)
     music_title = models.CharField(max_length=250)
-    music_file = models.FileField(default='')
+    music_file = models.FileField(upload_to = 'media/')
     music_artist = models.CharField(max_length=250, null = True)
     music_album = models.CharField(max_length=250, null=True)
     

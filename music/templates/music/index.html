@@ -21,6 +21,7 @@
             <th>Album</th>
             <th>Artist</th>
             <th>Coverart</th>
+            <th>Play Audio</th>
         </tr>
     </thead>
     {% if musics %}
@@ -36,6 +37,11 @@
                 alt="No Image Found"
                 style="width: 50px;height: 50px;"
             /></td>
+            <td>
+                <audio controls>
+                    <source src="{{ m.music_file.url }}" type="audio/mpeg">
+                </audio>
+            </td>
         </tr>
         {% endfor %}
     {% else %}
