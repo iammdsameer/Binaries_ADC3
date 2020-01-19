@@ -52,7 +52,7 @@ def editMusic(request):
         
     return render(request,'music/editMusic.html',{'music':music})
 
-def playMusic(request):
+def addAlbumGenre(request):
     
     pass
 
