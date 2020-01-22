@@ -9,6 +9,15 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+
+def index(request):
+    costumers = Customers.objects.all()
+    if request.GET:
+        query = request.GET['q']
+        costumers = get_data_queryset(str(query))
+
+    return render(request, 'user/login.html', {'user': user})
+
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -48,6 +57,7 @@ def profile(request):
     context['user'] = request.user
     return render(request,'user/profile.html',context={})
 
+<<<<<<< HEAD
 def payment(request):
     publishKey = settings.STRIPE_PUBLISHABLE_KEY
     if request.method == "POST":
@@ -62,3 +72,24 @@ def payment(request):
         except stripe.error.CardError as e:
             pass
     return render(request, 'user/payment.html', {'publishKey': publishKey})
+=======
+
+def contact(request):
+    #if request.method=="POST":
+        #name=request.POST['name']
+
+       return render(request,'user/contact.html',context={})  
+
+def get_data_queryset(query=None):
+    queryset = []
+    queries = query.split(' ')
+    for q in queries:
+        costumers = Costumers.objects.filter(
+            Q(f_name__icontains=q) |
+            Q(l_name__icontains=q) | Q(email__icontains=q)
+        )
+
+        for c in costumers:
+            queryset.append(c)
+    return list(set(queryset))
+>>>>>>> 8b988a2c595b681b388238f74cb2e3badc7831df
