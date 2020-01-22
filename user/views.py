@@ -4,6 +4,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+
+def index(request):
+    costumers = Customers.objects.all()
+    if request.GET:
+        query = request.GET['q']
+        costumers = get_data_queryset(str(query))
+
+    return render(request, 'user/login.html', {'user': user})
+
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -43,3 +52,16 @@ def profile(request):
     context['user'] = request.user
     return render(request,'user/profile.html',context={})
 
+
+def get_data_queryset(query=None):
+    queryset = []
+    queries = query.split(' ')
+    for q in queries:
+        costumers = Costumers.objects.filter(
+            Q(f_name__icontains=q) |
+            Q(l_name__icontains=q) | Q(email__icontains=q)
+        )
+
+        for c in costumers:
+            queryset.append(c)
+    return list(set(queryset))
