@@ -22,10 +22,5 @@ urlpatterns = [
     path('register/',views.register, name='register'),
     path('profile/',views.profile,name ='profile'),
     path('logout/', views.user_logout, name='logout'),
-<<<<<<< HEAD
-    path('payment/', views.payment, name='payment'),
-=======
     path('contact/',views.contact, name='contact')
->>>>>>> 8b988a2c595b681b388238f74cb2e3badc7831df
-
 ]

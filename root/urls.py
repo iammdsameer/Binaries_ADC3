@@ -21,7 +21,7 @@ from django.conf.urls import url
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('payment/', include('payment.urls')),
     path('user/',include('user.urls')),
     path('',include('music.urls')),
 ]
