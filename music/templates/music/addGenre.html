@@ -6,7 +6,7 @@
     </p>
 
     <form action="" method="POST">
-        {% csrf_token %} {{form}}
+        {% load crispy_forms_tags %} {% csrf_token %} {{form|crispy }}
         <br />
         <button type="submit">Submit</button>
     </form>
@@ -29,7 +29,13 @@
         <tr>
             <td>{{ g.name }}</td>
 
-            <td><img src="{{ g.genre_logo}}" alt="No image Found" style="width: 40px;height: 40px; border-radius:1px;" /></td>
+            <td>
+                <img
+                    src="{{ g.genre_logo}}"
+                    alt="No image Found"
+                    style="width: 40px;height: 40px; border-radius:1px;"
+                />
+            </td>
         </tr>
         {% endfor %} {% else %}
         <div class="container">

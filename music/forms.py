@@ -6,8 +6,9 @@ class UploadMusic(forms.ModelForm):
     class Meta:
         model = Musics
         fields  = (
-            'music_length',
+           
             'music_title',
+            'music_length',
             'music_file',
             'music_genre',
             'music_artist',

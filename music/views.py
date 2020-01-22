@@ -59,14 +59,14 @@ def addGenre(request):
     return render (request,'music/addGenre.html',{'form':form,'genre':genres})
 
 def addAlbums(request):
-     albums  =Albums.objects.all()
+     
      if request.method == 'POST':
        form = AddAlbum(request.POST)
        if form.is_valid():
            form.save()
            #return redirect('music:homepage')
      form = AddAlbum()
-     
+     albums  =Albums.objects.all()
      return render (request,'music/addAlbum.html',{'form':form,'albums':albums})
 
 
