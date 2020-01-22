@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'user',
     'music',
+    'stripe',
 ]
 
 
@@ -128,3 +129,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# stript stuff
+
+# test keys
+STRIPE_PUBLISHABLE_KEY = 'pk_test_g28NAqFNmGzhURBvvzJUcJ9d00LEtu3gqE'
+STRIPE_SECRET_KEY = 'sk_test_vnHeTTtD3bSF4nOY07zbZiBJ009ZwKGIXy'

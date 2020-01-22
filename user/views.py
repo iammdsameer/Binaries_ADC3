@@ -3,6 +3,11 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.conf import settings
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def register(request):
     if request.method == 'POST':
@@ -43,3 +48,17 @@ def profile(request):
     context['user'] = request.user
     return render(request,'user/profile.html',context={})
 
+def payment(request):
+    publishKey = settings.STRIPE_PUBLISHABLE_KEY
+    if request.method == "POST":
+        token = request.POST['stripeToken']
+        try:
+            charge = stripe.Charge.create(
+                amount=999, # Amount in dollars and cents
+                currency='usd',
+                description='Example charge',
+                source=token
+            )
+        except stripe.error.CardError as e:
+            pass
+    return render(request, 'user/payment.html', {'publishKey': publishKey})
