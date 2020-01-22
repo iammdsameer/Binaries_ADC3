@@ -53,6 +53,12 @@ def profile(request):
     return render(request,'user/profile.html',context={})
 
 
+def contact(request):
+    #if request.method=="POST":
+        #name=request.POST['name']
+
+       return render(request,'user/contact.html',context={})  
+
 def get_data_queryset(query=None):
     queryset = []
     queries = query.split(' ')
