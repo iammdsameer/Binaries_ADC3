@@ -11,5 +11,8 @@ urlpatterns = [
    path('upload/',views.upload,name = "upload_music"),
    path('del/',views.deleteMusic,name = 'manage'),
    path('edit/',views.editMusic,name = 'manage'),
+   path('addGenre/',views.addGenre,name = 'addGenre'),
+   path('addAlbum/',views.addAlbums,name = 'addAlbum'),
+   
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

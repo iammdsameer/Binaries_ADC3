@@ -1,0 +1,46 @@
+{%extends 'base.html'%} {%block content%} {%if user.is_authenticated%}
+<div class="container" style="width:600px;margin-top:50px">
+    <h4 class="h4">Add Genre</h4>
+    <p class="lead" style="font-size: 15px;">
+        Add albums
+    </p>
+
+    <form action="" method="POST">
+        {% csrf_token %} {{form}}
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<br />
+<hr />
+<h5>Added Albums</h5>
+<br />
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Album Title</th>
+            <th>Artist</th>
+            <th>Album Art</th>
+        </tr>
+    </thead>
+    {% if albums %}
+    <tbody>
+        {% for a in albums %}
+        <tr>
+            <td>{{ a.album_title }}</td>
+            <td>{{ a.artist }}</td>
+            <td><img src="{{ a.logo}}" alt="No image Found" /></td>
+        </tr>
+        {% endfor %} {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="card-body"></div>
+            </div>
+        </div>
+    </tbody>
+    {% endif %}
+</table>
+{%else%}
+<p>Please login in order to add Album</p>
+<a class="nav-link" href="../user/login">Login</a>
+{%endif%} {% endblock%}

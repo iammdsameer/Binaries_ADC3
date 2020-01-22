@@ -5,70 +5,10 @@
         Upload music of your choice.
     </p>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="col">
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Music Title"
-                name="music_title"
-            />
-            <br />
-        </div>
-        <div class="col">
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Artist"
-                name="music_artist"
-            />
-        </div>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {{form}}
         <br />
-        <div class="col">
-            <input
-                type="number"
-                class="form-control"
-                placeholder="Music Length"
-                name="music_length"
-            />
-        </div>
-        <br />
-        <div class="col">
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Album"
-                name="music_album"
-            />
-        </div>
-        <br />
-        <div class="col">
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Image URL"
-                name="music_coverArt"
-            />
-        </div>
-        <br />
-        <div class="col">
-            <input
-                type="file"
-                class="form-control"
-                placeholder="Upload Music File Here"
-                name="music_files"
-            />
-        </div>
-        <div class="col">
-            <button
-                style="margin-top: 10px;"
-                type="submit"
-                class="btn btn-success"
-            >
-                Upload
-            </button>
-        </div>
+        <button type="submit">Submit</button>
     </form>
 </div>
 {%else%}

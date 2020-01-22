@@ -12,7 +12,7 @@ class UploadMusic(forms.ModelForm):
             'music_genre',
             'music_artist',
             'music_album',
-            'music_coverArt'
+            'music_coverArt',
             
             )
 class AddAlbum(forms.ModelForm):
@@ -22,11 +22,11 @@ class AddAlbum(forms.ModelForm):
             
             'artist',
             'album_title',
-            'album_logo'
+            'album_logo',
             
         )
 
 class AddGenre(forms.ModelForm):
     class Meta:
         model = Genres
-        fields = ('name')
+        fields = ('name','genre_logo',)
