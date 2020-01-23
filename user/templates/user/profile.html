@@ -2,6 +2,12 @@
 
 <p>Hey <b>{{user.username}},</b></p>
 <small>You're Logged In</small>
+<form action="POST">
+    {% csrf_token %} {%if user.is_premium =="False"%}
+    <button type="submit" value="{{user.id}}">Convert to Premium</button>
+
+    {%endif%}
+</form>
 <form method="POST" action="../logout/">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Log Out</button>
