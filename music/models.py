@@ -13,6 +13,8 @@ class Genres(models.Model):
     name = models.CharField(max_length=200)
     genre_logo = models.CharField(max_length=2083, default="https://i.ytimg.com/vi/5Peo-ivmupE/maxresdefault.jpg")
 
+    def __str__(self):
+        return self.name
 
 class Musics(models.Model):
     # How to use

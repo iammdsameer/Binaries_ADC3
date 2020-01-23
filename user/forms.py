@@ -6,14 +6,10 @@ class RegisterUser(forms.ModelForm):
     class Meta:
         model = Customers
         fields = (
-            'f_name',
-            'm_name',
-            'l_name',
-            'dob',
+            'name',
+            'age',
             'phone',
             'email',
-            'gender'
-            
-            
+            'country',
         )
         
