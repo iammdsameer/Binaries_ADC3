@@ -16,6 +16,7 @@ class UploadMusic(forms.ModelForm):
             'music_coverArt',
             
             )
+        #add musics' belonging albums
 class AddAlbum(forms.ModelForm):
     class Meta:
         model = Albums
@@ -26,7 +27,7 @@ class AddAlbum(forms.ModelForm):
             'album_logo',
             
         )
-
+#add musics' genere 
 class AddGenre(forms.ModelForm):
     class Meta:
         model = Genres

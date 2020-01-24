@@ -1,6 +1,6 @@
 {%extends 'base.html'%} {% block script%}
 <script>
-    Stripe.setPublishableKey('{{ publishkey }}');
+    Stripe.setPublishableKey("{{ publishkey }}");
     function stripeResponseHandler(status, response) {
         var $form = $("#payment-form");
 
@@ -16,9 +16,20 @@
         }
     }
 </script>
-{% endblock%} <script> $(document).ready(function() { $(function(){ var $form = $('#payment-form');
-$form.submit(function(event) { $form.find('.submit').prop('disabled', true);
-Stripe.card.createToken($form, stripeResponseHandler); return false; }); }); }); </script> {% block content %}
+{% endblock%}
+<script>
+    $(document).ready(function() {
+        $(function() {
+            var $form = $("#payment-form");
+            $form.submit(function(event) {
+                $form.find(".submit").prop("disabled", true);
+                Stripe.card.createToken($form, stripeResponseHandler);
+                return false;
+            });
+        });
+    });
+</script>
+{% block content %}
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <form action="" method="post" id="payment-form" class="form">

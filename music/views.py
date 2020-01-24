@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .forms import UploadMusic, AddAlbum, AddGenre
 
+# Returns index page with list of added songs
 def index(request):
     music = Musics.objects.all()
     if request.GET:
@@ -14,7 +15,7 @@ def index(request):
 
     return render(request, 'music/index.html', {'musics': music})
 
-# only a logged in user can
+# Upload Music only by logge in users
 def upload(request):
     if request.method == 'POST':
        form = UploadMusic(request.POST,request.FILES)
@@ -24,6 +25,7 @@ def upload(request):
     form = UploadMusic()
     return render (request,'music/upload.html',{'form':form})
 
+#delete added music authenticated users only
 def deleteMusic(request):
     music=Musics.objects.all()
     if request.method =='POST':
@@ -33,7 +35,7 @@ def deleteMusic(request):
     
     return render(request,'music/deleteMusic.html',{'music':music})
 
-
+#Update MusicInfo
 def editMusic(request):
     music=Musics.objects.all()
     if request.method =='POST':
@@ -48,6 +50,7 @@ def editMusic(request):
         
     return render(request,'music/editMusic.html',{'music':music})
 
+#add music genere
 def addGenre(request):
     if request.method == 'POST':
        form = AddGenre(request.POST)
@@ -58,6 +61,7 @@ def addGenre(request):
     genres = Genres.objects.all()
     return render (request,'music/addGenre.html',{'form':form,'genre':genres})
 
+#add music albums
 def addAlbums(request):
      
      if request.method == 'POST':
@@ -70,28 +74,20 @@ def addAlbums(request):
      return render (request,'music/addAlbum.html',{'form':form,'albums':albums})
 
 
-def pauseMusic(request):
-    pass
-
-def shuffalMusic(request):
-    pass
-
-def changeMusic(request):
-    #next music
-    #prev music
-    pass
 
 
 
+
+#search  functionality
 def get_data_queryset(query=None):
     queryset = []
-    queries = query.split(' ')
+    queries = query.split(' ') # splits after every white space for searching each keyword
     for q in queries:
         music = Musics.objects.filter(
             Q(music_title__icontains = q) |
-            Q(music_artist__icontains = q) | Q(music_album__icontains = q)
+            Q(music_artist__icontains = q) | Q(music_album__icontains = q) 
         )
 
         for m in music:
             queryset.append(m)
-    return list(set(queryset))
+    return list(set(queryset)) #queries type casted to list
