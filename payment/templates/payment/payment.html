@@ -16,10 +16,9 @@
         }
     }
 </script>
-{% endblock%} {% block jquery%} $(function(){ var $form = $('#payment-form');
+{% endblock%} <script> $(function(){ var $form = $('#payment-form');
 $form.submit(function(event) { $form.find('.submit').prop('disabled', true);
-Stripe.card.createToken($form, stripeResponseHandler); return false; }); }); {%
-endblock %} {% block content %}
+Stripe.card.createToken($form, stripeResponseHandler); return false; }); }); </script> {% block content %}
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <form action="" method="post" id="payment-form" class="form">
