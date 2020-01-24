@@ -2,7 +2,7 @@
 
 <p>Hey <b>{{user.username}},</b></p>
 <small>You're Logged In</small>
-<form method="POST" action="/payment/{{user.id}}">
+<form method="POST" action="payment/">
     {% csrf_token %}
     <button type="submit" value="{{user.id}}">Convert to Premium</button>
 </form>
@@ -13,8 +13,6 @@
 <br />
 <hr />
 <br />
-
-{% if user.is_premium %}
 
 <table class="table table-dark">
     <thead>
@@ -61,6 +59,6 @@
     </tbody>
     {% endif %}
 </table>
-{% endif %} {% else %}
+{% else %}
 <p>Please Login</p>
 {% endif %} {%endblock%}
