@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from music.models import Musics
 from .models import Customers
 from django.urls import reverse
 from django.contrib.auth.models import User, auth
@@ -51,15 +52,15 @@ def user_logout(request):
         return HttpResponseRedirect(reverse('login'))
 
 def profile(request):
-    context = {}
-    context['user'] = request.user
+    music = Musics.objects.all()
+    # context['user'] = request.user
     if request.POST:
         
         customer_id = request.POST['cid']
         Customers.objects.filter(id = cid).update(is_premium='True')
         
         
-    return render(request,'user/profile.html',context={})
+    return render(request,'user/profile.html',context={'musics':music})
 
 
 def contact(request):

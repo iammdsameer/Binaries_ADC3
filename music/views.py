@@ -64,7 +64,7 @@ def addAlbums(request):
        form = AddAlbum(request.POST)
        if form.is_valid():
            form.save()
-           return redirect('music:homepage')
+           #return redirect('music:homepage')
      form = AddAlbum()
      albums  =Albums.objects.all()
      return render (request,'music/addAlbum.html',{'form':form,'albums':albums})
