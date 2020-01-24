@@ -11,3 +11,8 @@ Install the requirements to run the application.
 ```sh
 $ pip install -r requirements.txt
 ```
+#### URLs
+>Login ```/user/login```<br>
+>Register ```/user/register```<br>
+>Profile ```/user/profile```<br>
+>Login ```/user/login```
