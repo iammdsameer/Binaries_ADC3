@@ -7,12 +7,11 @@ from django.conf.urls import url
 app_name = "music"
 
 urlpatterns = [
-   path('', views.index, name="homepage"),
-   path('upload/',views.upload,name = "upload_music"),
-   path('del/',views.deleteMusic,name = 'manage'),
-   path('edit/',views.editMusic,name = 'manage'),
-   path('addGenre/',views.addGenre,name = 'addGenre'),
-   path('addAlbum/',views.addAlbums,name = 'addAlbum'),
-   
+    path("", views.index, name="homepage"),
+    path("upload/", views.upload, name="upload_music"),
+    path("delete/<int:pk>", views.deleteMusic, name="delete"),
+    path("<int:pk>/", views.upload, name="edit"),
+    path("addGenre/", views.addGenre, name="addGenre"),
+    path("addAlbum/", views.addAlbums, name="addAlbum"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

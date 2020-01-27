@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def register(request):
+    
     if request.method =='POST':
         if request.POST['password1']==request.POST['password2']:
             try:
@@ -39,6 +40,17 @@ def register(request):
     else:
         return render(request, "user/register.html", context={})
 
+def edit(request,pk):
+    if request.method =='POST':
+        f_name = request.POST['first_name'].capitalize()
+        l_name = request.POST['last_name'].capitalize()
+        m_name = request.POST['middle_name'].capitalize()
+        dob = request.POST['dob']
+        phone = request.POST['phone']
+        country = request.POST['country']
+        gender = request.POST['gender']
+        customers = Customers.objects.filter(pk=pk).update(email=email,f_name=f_name,l_name=l_name,m_name=m_name,dob=dob,phone=phone,gender = gender, country=country)
+                
 
 def user_login(request):
     context = {}
@@ -69,7 +81,6 @@ def profile(request):
         Customers.objects.filter(id=cid).update(is_premium="True")
 
     return render(request, "user/profile.html", context={"musics": music})
-
 
 def contact(request):
     # if request.method=="POST":
