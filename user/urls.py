@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.urls import path, include
 from . import views
-
+app_name = "user"
 urlpatterns = [
     path('login/', views.user_login, name="login"),
     path('register/',views.register, name='register'),

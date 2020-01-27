@@ -6,9 +6,16 @@
     {% csrf_token %}
     <button type="submit" value="{{user.id}}">Convert to Premium</button>
 </form>
+<br />
 <form method="POST" action="../logout/">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Log Out</button>
+    <br />
+    <br />
+    <form action="" method="post">
+        <button type="submit">Edit Profile</button>
+    </form>
+    <br />
 </form>
 <br />
 <hr />
@@ -23,8 +30,12 @@
             <th>Coverart</th>
             <th>Play Audio</th>
             <th>Download Audio</th>
+            {%if user.get_username == 'admin'%}
+            <th>Edit Song</th>
+            {%endif%}
         </tr>
     </thead>
+
     {% if musics %}
     <tbody>
         {% for m in musics %}
@@ -49,6 +60,11 @@
                 <!-- Download song from here -->
                 <a href="{{ m.music_file.url }}" download> Download </a>
             </td>
+            {%if user.get_username == 'admin'%}
+            <td>
+                <a href="{{ m.music_file.url }}" download> Edit </a>
+            </td>
+            {%endif%}
         </tr>
         {% endfor %} {% else %}
         <div class="container">
