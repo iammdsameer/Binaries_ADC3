@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .forms import UploadMusic, AddAlbum, AddGenre
+from django.contrib.auth.decorators import login_required
 
 # Returns index page with list of added songs
 def index(request):
@@ -16,7 +17,8 @@ def index(request):
     return render(request, "music/index.html", {"musics": music})
 
 
-# Upload Music only by logge in users
+# Upload Music only by logged in users
+@login_required(login_url="/user/login/")
 def upload(request, pk=0):
     if request.method == "GET":
         if pk == 0:
@@ -26,17 +28,15 @@ def upload(request, pk=0):
             form = UploadMusic(instance=music)
         return render(request, "music/upload.html", {"form": form})
     else:
-        if pk == 0:
-            form = UploadMusic(request.POST)
-        else:
 
-            form = UploadMusic(request.POST, request.FILES, instance=music)
+        form = UploadMusic(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("/")
 
 
 # delete added music authenticated users only
+@login_required(login_url="/user/login/")
 def deleteMusic(request, pk):
 
     music = Musics.objects.get(pk=pk)
@@ -45,29 +45,30 @@ def deleteMusic(request, pk):
 
 
 # Update MusicInfo
-def editMusic(request):
-    music = Musics.objects.all()
-    if request.method == "POST":
-        music_id = request.POST["id"]
-        music_artist = request.POST["music_artist"]
-        music_title = request.POST["music_title"]
-        music_length = request.POST["music_length"]
-        music_album = request.POST["music_album"]
-        music_coverArt = request.POST["music_coverArt"]
-        music_file = request.POST["music_file"]
-        Musics.objects.filter(id=music_id).update(
-            music_title=music_title,
-            music_artist=music_artist,
-            music_album=music_album,
-            music_coverArt=music_coverArt,
-            music_file=music_file,
-            music_length=music_length,
-        )
+# def editMusic(request):
+#     music = Musics.objects.all()
+#     if request.method == "POST":
+#         music_id = request.POST["id"]
+#         music_artist = request.POST["music_artist"]
+#         music_title = request.POST["music_title"]
+#         music_length = request.POST["music_length"]
+#         music_album = request.POST["music_album"]
+#         music_coverArt = request.POST["music_coverArt"]
+#         music_file = request.POST["music_file"]
+#         Musics.objects.filter(id=music_id).update(
+#             music_title=music_title,
+#             music_artist=music_artist,
+#             music_album=music_album,
+#             music_coverArt=music_coverArt,
+#             music_file=music_file,
+#             music_length=music_length,
+#         )
 
-    return render(request, "music/editMusic.html", {"music": music})
+#     return render(request, "music/editMusic.html", {"music": music})
 
 
 # add music genere
+@login_required(login_url="/user/login/")
 def addGenre(request):
     if request.method == "POST":
         form = AddGenre(request.POST)
@@ -80,6 +81,7 @@ def addGenre(request):
 
 
 # add music albums
+@login_required(login_url="/user/login/")
 def addAlbums(request):
 
     if request.method == "POST":

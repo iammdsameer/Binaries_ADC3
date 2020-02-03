@@ -6,7 +6,8 @@
     </p>
 
     <form action="" method="POST" enctype="multipart/form-data">
-        {% load crispy_forms_tags %} {% csrf_token %} {{form|crispy }}
+        {% csrf_token %} {% load crispy_forms_tags %} {{ field.errors }}
+        {{form|crispy }}
         <br />
         <button type="submit">Submit</button>
     </form>
