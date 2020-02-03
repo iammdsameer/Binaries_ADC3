@@ -21,7 +21,7 @@ def upload(request):
        form = UploadMusic(request.POST,request.FILES)
        if form.is_valid():
            form.save()
-           #return redirect('music:homepage')
+           return redirect('music:homepage')
     form = UploadMusic()
     return render (request,'music/upload.html',{'form':form})
 
@@ -83,10 +83,7 @@ def get_data_queryset(query=None):
     queryset = []
     queries = query.split(' ') # splits after every white space for searching each keyword
     for q in queries:
-        music = Musics.objects.filter(
-            Q(music_title__icontains = q) |
-            Q(music_artist__icontains = q) | Q(music_album__icontains = q) 
-        )
+        music = Musics.objects.filter(Q(music_title__icontains=q) | Q(music_album__album_title__icontains=q) | Q(music_artist__icontains=q))
 
         for m in music:
             queryset.append(m)
