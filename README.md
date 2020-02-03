@@ -14,5 +14,4 @@ $ pip install -r requirements.txt
 #### URLs
 >Login ```/user/login```<br>
 >Register ```/user/register```<br>
->Profile ```/user/profile```<br>
->Login ```/user/login```
+>Profile ```/user/profile```
