@@ -23,4 +23,4 @@ def payment(request):
             
         except stripe.error.CardError as e:
             pass
-    return render(request, 'payment/payment.html', {'publishKey': publishKey})
+    return render(request, 'payment/payment-update.html', {'publishKey': publishKey})

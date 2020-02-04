@@ -10,7 +10,7 @@ urlpatterns = [
     path("", views.index, name="homepage"),
     path("upload/", views.upload, name="upload_music"),
     path("delete/<int:pk>", views.deleteMusic, name="delete"),
-    path("<int:pk>/", views.upload, name="edit"),
+    # path("update/<int:pk>", views.editMusic, name="edit"),
     path("addGenre/", views.addGenre, name="addGenre"),
     path("addAlbum/", views.addAlbums, name="addAlbum"),
 ]

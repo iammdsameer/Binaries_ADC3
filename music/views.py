@@ -45,9 +45,13 @@ def deleteMusic(request, pk):
 
 
 # Update MusicInfo
-# def editMusic(request):
+# def editMusic(request, pk):
 #     music = Musics.objects.all()
+#     form = UploadMusic()
+
 #     if request.method == "POST":
+#         music = Musics.objects.get(pk=pk)
+#         form = UploadMusic(instance=music)
 #         music_id = request.POST["id"]
 #         music_artist = request.POST["music_artist"]
 #         music_title = request.POST["music_title"]
@@ -55,10 +59,10 @@ def deleteMusic(request, pk):
 #         music_album = request.POST["music_album"]
 #         music_coverArt = request.POST["music_coverArt"]
 #         music_file = request.POST["music_file"]
-#         Musics.objects.filter(id=music_id).update(
+#         Musics.objects.get(pk=pk).update(
 #             music_title=music_title,
 #             music_artist=music_artist,
-#             music_album=music_album,
+#             music_album__album_title=music_album,
 #             music_coverArt=music_coverArt,
 #             music_file=music_file,
 #             music_length=music_length,
