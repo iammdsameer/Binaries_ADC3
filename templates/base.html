@@ -15,7 +15,11 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Molle:400i&display=swap" rel="stylesheet">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
         <style>
             #sticky-footer {
                 flex-shrink: none;
@@ -27,8 +31,12 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
             <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="http://placehold.it/150x50?text=Logo" alt="" />
+               
+                    <h4
+                        style="font-family: 'Molle', cursive; color: cornsilk;"
+                    >
+                        Binaries
+                    </h4>
                 </a>
                 <button
                     class="navbar-toggler"
@@ -62,7 +70,9 @@
                             {%endif%}
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/contact/">Contact</a>
+                            <a class="nav-link" href="/user/contact/"
+                                >Contact</a
+                            >
                         </li>
                     </ul>
                 </div>
@@ -104,8 +114,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://js.stripe.com/v2/"></script>
-        {% block script%}
-
-        {% endblock %}
+        {% block script%} {% endblock %}
     </body>
 </html>

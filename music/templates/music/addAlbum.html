@@ -1,6 +1,6 @@
 {%extends 'base.html'%} {%block content%} {%if user.is_authenticated%}
 <div class="container" style="width:600px;margin-top:50px">
-    <h4 class="h4">Add Genre</h4>
+    <h4 class="h4">Add Album</h4>
     <p class="lead" style="font-size: 15px;">
         Add albums
     </p>
@@ -19,7 +19,8 @@
     <thead>
         <tr>
             <th>Album Title</th>
-            <th>Artist</th>
+
+            <th>Year</th>
             <th>Album Art</th>
         </tr>
     </thead>
@@ -28,8 +29,15 @@
         {% for a in albums %}
         <tr>
             <td>{{ a.album_title }}</td>
-            <td>{{ a.artist }}</td>
-            <td><img src="{{ a.album_logo}}" alt="No image Found" style="width: 40px;height: 40px; border-radius:1px;"/></td>
+
+            <td>
+                <img
+                    src="{{ a.album_logo}}"
+                    alt="No image Found"
+                    style="width: 40px;height: 40px; border-radius:1px;"
+                />
+            </td>
+            <td>{{a.year}}</td>
         </tr>
         {% endfor %} {% else %}
         <div class="container">

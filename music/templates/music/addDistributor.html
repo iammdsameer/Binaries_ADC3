@@ -1,0 +1,51 @@
+{%extends 'base.html'%} {%block content%} {%if user.is_authenticated%}
+<div class="container" style="width:600px;margin-top:50px">
+    <h4 class="h4">AddDistributors</h4>
+    <p class="lead" style="font-size: 15px;">
+        Add Distributors
+    </p>
+
+    <form action="" method="POST">
+        {% load crispy_forms_tags %} {% csrf_token %} {{form|crispy }}
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<br />
+<hr />
+<h5>Added Distributors</h5>
+<br />
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Logo</th>
+        </tr>
+    </thead>
+    {% if dis %}
+    <tbody>
+        {% for d in dis %}
+        <tr>
+            <td>{{ d.name }}</td>
+
+            <td>
+                <img
+                    src="{{ a.logo}}"
+                    alt="No image Found"
+                    style="width: 40px;height: 40px; border-radius:1px;"
+                />
+            </td>
+        </tr>
+        {% endfor %} {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="card-body"></div>
+            </div>
+        </div>
+    </tbody>
+    {% endif %}
+</table>
+{%else%}
+<p>Please login in order to addDistributors</p>
+<a class="nav-link" href="../user/login">Login</a>
+{%endif%} {% endblock%}

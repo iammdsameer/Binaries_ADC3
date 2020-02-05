@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Musics, Albums, Genres
+from .models import Musics, Albums, Genres, Artists, Distributors
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .forms import UploadMusic, AddAlbum, AddGenre
+from .forms import UploadMusic, AddAlbum, AddGenre, AddArtist, AddDistributor
 from django.contrib.auth.decorators import login_required
 
 # Returns index page with list of added songs
@@ -96,6 +96,32 @@ def addAlbums(request):
     form = AddAlbum()
     albums = Albums.objects.all()
     return render(request, "music/addAlbum.html", {"form": form, "albums": albums})
+
+#addDistributor
+@login_required(login_url="/user/login/")
+def addDistributor(request):
+
+    if request.method == "POST":
+        form = AddDistributor(request.POST)
+        if form.is_valid():
+            form.save()
+            # return redirect('music:homepage')
+    form = AddDistributor()
+    dis = Distributors.objects.all()
+    return render(request, "music/addDistributor.html", {"form": form, "dis": dis})
+
+#addArtist
+@login_required(login_url="/user/login/")
+def addArtist(request):
+
+    if request.method == "POST":
+        form = AddArtist(request.POST)
+        if form.is_valid():
+            form.save()
+            # return redirect('music:homepage')
+    form = AddArtist()
+    artist = Artists.objects.all()
+    return render(request, "music/addArtist.html", {"form": form, "artist": artist})
 
 
 # search  functionality

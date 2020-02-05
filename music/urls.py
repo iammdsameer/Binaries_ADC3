@@ -13,6 +13,8 @@ urlpatterns = [
     path("delete/<int:pk>", views.deleteMusic, name="delete"),
     # path("update/<int:pk>", views.editMusic, name="edit"),
     path("addGenre/", views.addGenre, name="addGenre"),
+    path("addArtist/", views.addArtist, name="addArtist"),
+    path("addDistributor/", views.addDistributor, name="addDistributor"),
     path("addAlbum/", views.addAlbums, name="addAlbum"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
