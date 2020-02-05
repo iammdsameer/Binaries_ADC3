@@ -9,6 +9,7 @@ app_name = "music"
 urlpatterns = [
     path("", views.index, name="homepage"),
     path("upload/", views.upload, name="upload_music"),
+    path("<int:pk>/", views.upload, name="edit"),
     path("delete/<int:pk>", views.deleteMusic, name="delete"),
     # path("update/<int:pk>", views.editMusic, name="edit"),
     path("addGenre/", views.addGenre, name="addGenre"),
