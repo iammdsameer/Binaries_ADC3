@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import Musics, Albums, Genres, Artists, Distributors
-from django.http import HttpResponse
+
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .forms import UploadMusic, AddAlbum, AddGenre, AddArtist, AddDistributor
 from django.contrib.auth.decorators import login_required
 from .decorators import admin
+from django.http import HttpResponse,JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Returns index page with list of added songs
 def index(request):
@@ -93,7 +95,7 @@ def addDistributor(request):
 
 #addArtist
 @login_required(login_url="/user/login/")
-@admin
+
 def addArtist(request):
 
     if request.method == "POST":
@@ -113,8 +115,16 @@ def get_data_queryset(query=None):
         " "
     )  # splits after every white space for searching each keyword
     for q in queries:
-        music = Musics.objects.filter(Q(music_title__icontains=q) | Q(music_album__album_title__icontains=q) | Q(music_artist__icontains=q))
+        music = Musics.objects.filter(Q(music_title__icontains=q) | Q(music_album__album_title__icontains=q) | Q(artist__name__icontains=q))
 
         for m in music:
             queryset.append(m)
     return list(set(queryset))  # queries type casted to list
+
+def music_pagination(request,PAGENO,SIZE):
+    skip = SIZE*(PAGENO-1)
+    music = Musics.objects.all()[skip:(PAGENO*SIZE)]
+    dict = {
+        "musics":List(Musics.values("music_title","artist","music_length"))
+    }
+    return JsonResponse(dict)

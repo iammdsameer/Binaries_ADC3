@@ -91,7 +91,6 @@ def contact(request):
 
     return render(request, "user/contact.html", context={})
 
-
 def get_data_queryset(query=None):
     queryset = []
     queries = query.split(" ")

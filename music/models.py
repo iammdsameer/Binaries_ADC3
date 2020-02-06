@@ -3,13 +3,13 @@ from datetime import datetime
 
 # Create your models here.
 class Artists(models.Model):
-    name = models.CharField(max_length=250, default= "Unknown")
-    image = models.CharField(max_length = 2083, default = "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimg%2F870190.png&f=1&nofb=1")
+    name = models.CharField(max_length=250, default= "Unknown" ,verbose_name="Artist's Name")
+    image = models.CharField(max_length = 2083,verbose_name="Artist's Image", default = "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimg%2F870190.png&f=1&nofb=1")
     def __str__(self):
         return self.name
 class Distributors(models.Model):
-    name = models.CharField(max_length=250, default= "Unknown")
-    logo = models.CharField(max_length=2083, default = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmdbootstrap.com%2Fimg%2FPhotos%2FOthers%2Fplaceholder-avatar.jpg&f=1&nofb=1")
+    name = models.CharField(max_length=250, default= "Unknown", verbose_name="Distributor's Name")
+    logo = models.CharField(max_length=2083, verbose_name="Distributor's Logo",default = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmdbootstrap.com%2Fimg%2FPhotos%2FOthers%2Fplaceholder-avatar.jpg&f=1&nofb=1")
     def __str__(self):
         return self.name
 class Albums(models.Model):
