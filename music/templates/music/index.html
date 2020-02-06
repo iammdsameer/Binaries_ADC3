@@ -1,15 +1,25 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <form method="get">
     <!-- <input type="text" name="q" placeholder="Search" value="{{ query }}"> -->
-    
-    <div class="col-md-4 offset-md-4 mt-5 border border-success pt-3" style="margin-bottom: 10px;">
+
+    <div
+        class="col-md-4 offset-md-4 mt-5 border border-success pt-3"
+        style="margin-bottom: 10px;"
+    >
         <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search ......" name='q' value="{{ query }}">
-        <div class="input-group-append">
-            <span class="input-group-text"><i class="fa fa-search"></i></span>
-        </div>
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Search ......"
+                name="q"
+                value="{{ query }}"
+            />
+            <div class="input-group-append">
+                <span class="input-group-text"
+                    ><i class="fa fa-search"></i
+                ></span>
+            </div>
         </div>
     </div>
 </form>
@@ -26,30 +36,38 @@
     </thead>
     {% if musics %}
     <tbody>
-        {% for m in musics %} 
+        {% for m in musics %}
         <tr>
-            <td>{{ m.music_title }}</td>
+            <td>
+                {{ m.music_title }}
+                <br /><span style="font-size: 12px;color:darkgray;"
+                    >{{m.music_genre}}</span
+                >
+                <br />
+                <span style="font-size: 10px;color:darkgray;"
+                    >{{m.date_uploaded}}</span
+                >
+            </td>
             <td>{{ m.music_album }}</td>
-            <td>{{ m.music_artist }}</td>
-            <td><img
-                src="{{m.music_coverArt}}"
-                class="rounded float-left"
-                alt="No Image Found"
-                style="width: 50px;height: 50px;"
-            /></td>
+            <td>{{ m.artist }}</td>
+            <td>
+                <img
+                    src="{{m.music_coverArt}}"
+                    class="rounded float-left"
+                    alt="No Image Found"
+                    style="width: 50px;height: 50px;"
+                />
+            </td>
             <td>
                 <audio controls>
-                    <source src="{{ m.music_file.url }}" type="audio/mpeg">
+                    <source src="{{ m.music_file.url }}" type="audio/mpeg" />
                 </audio>
             </td>
         </tr>
-        {% endfor %}
-    {% else %}
+        {% endfor %} {% else %}
         <div class="container">
             <div class="row">
-                <div class="card-body">
-
-                </div>
+                <div class="card-body"></div>
             </div>
         </div>
     </tbody>

@@ -6,10 +6,11 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated
 
 
 
-
+@unauthenticated
 def register(request):
     
     if request.method =='POST':
@@ -51,9 +52,9 @@ def edit(request,pk):
         gender = request.POST['gender']
         customers = Customers.objects.filter(pk=pk).update(email=email,f_name=f_name,l_name=l_name,m_name=m_name,dob=dob,phone=phone,gender = gender, country=country)
                 
-
+@unauthenticated
 def user_login(request):
-    context = {}
+    
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -61,9 +62,11 @@ def user_login(request):
         if user:
             login(request, user)
             return redirect("user:profile")
+        else:
+            return render(request, "user/login.html", {"error":"You got your password or username wronged!!!"})
     else:
-        context["error"] = "Provide valid credentials !!"
-        return render(request, "user/login.html", context)
+        
+        return render(request, "user/login.html")
 
 
 def user_logout(request):

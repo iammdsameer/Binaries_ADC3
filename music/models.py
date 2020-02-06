@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Artists(models.Model):
@@ -41,7 +42,7 @@ class Musics(models.Model):
     music_title = models.CharField(max_length=250)
     music_file = models.FileField(upload_to="media/")
     music_genre = models.ForeignKey(Genres, on_delete=models.CASCADE, null=True)
-    
+    date_uploaded = datetime.now()
     music_album = models.ForeignKey(Albums, on_delete=models.CASCADE, null=True)
     music_coverArt = models.CharField(
         max_length=2083, default="https://i.ytimg.com/vi/5Peo-ivmupE/maxresdefault.jpg"
