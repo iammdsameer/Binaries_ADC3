@@ -25,5 +25,5 @@ urlpatterns = [
     # path("delete/<int:pk>", views.deleteCustomer, name="deleteCustomer"),
     
     path("logout/", views.user_logout, name="logout"),
-    path("contact/", views.contact, name="contact"),
+    
 ]

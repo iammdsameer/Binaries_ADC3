@@ -11,6 +11,7 @@ from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Returns index page with list of added songs
+
 def index(request):
     music = Musics.objects.all()
     if request.GET:
@@ -67,18 +68,18 @@ def addGenre(request):
 @login_required(login_url="/user/login/")
 @admin
 
-def addAlbums(request):
+def addAlbums(request): 
 
     if request.method == "POST":
         form = AddAlbum(request.POST)
         if form.is_valid():
             form.save()
-            # return redirect('music:homepage')
+            return redirect('/')
     form = AddAlbum()
     albums = Albums.objects.all()
     return render(request, "music/addAlbum.html", {"form": form, "albums": albums})
 
-#addDistributor
+#addDistributor only logged in administrator  can
 @login_required(login_url="/user/login/")
 @admin
 
@@ -93,16 +94,16 @@ def addDistributor(request):
     dis = Distributors.objects.all()
     return render(request, "music/addDistributor.html", {"form": form, "dis": dis})
 
-#addArtist
+#addArtist only logged in administrator  can
 @login_required(login_url="/user/login/")
-
+@admin
 def addArtist(request):
 
     if request.method == "POST":
         form = AddArtist(request.POST)
         if form.is_valid():
             form.save()
-            # return redirect('music:homepage')
+            return redirect('/')
     form = AddArtist()
     artist = Artists.objects.all()
     return render(request, "music/addArtist.html", {"form": form, "artist": artist})
