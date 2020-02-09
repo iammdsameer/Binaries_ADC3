@@ -120,11 +120,3 @@ def get_data_queryset(query=None):
         for m in music:
             queryset.append(m)
     return list(set(queryset))  # queries type casted to list
-
-def music_pagination(request,PAGENO,SIZE):
-    skip = SIZE*(PAGENO-1)
-    music = Musics.objects.all()[skip:(PAGENO*SIZE)]
-    dict = {
-        "musics":List(Musics.values("music_title","artist","music_length"))
-    }
-    return JsonResponse(dict)

@@ -20,6 +20,9 @@ from . import views
 app_name = "restApi"
 urlpatterns = [
     path("", views.data, name="data"),
-    path('music/<int:pk>/', views.edit,name="edit_data")
+    path("<int:pk>",views.get_music, name="specific_data"),
+    path('edit/<int:pk>/', views.edit,name="edit_data"),
+    path("add",views.addMusic,name="addMusic"),
+    path("<int:PAGENO>/<int:SIZE>",views.music_pagination,name="pagination")
     
 ]

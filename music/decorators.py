@@ -7,5 +7,6 @@ def admin(view_func):
         
         if request.user.is_superuser:
             return view_func(request,*args,**kwargs)
-        
+        else:
+            return HttpResponse("You are not allowed to view this page!!")
     return wrapper_func
