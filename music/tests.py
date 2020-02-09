@@ -16,12 +16,32 @@
 #         self.assertEqual(lion.speak(), 'The lion says "roar"')
 #         self.assertEqual(cat.speak(), 'The cat says "meow"')
 from django.test import TestCase
-from .models import Music
+from .models import Artists, Musics, Distributors, Albums
+
 
 class MusicTestCase(TestCase):
     def setUp(self):
-        Music.objects.create(music_title='Main Hoon Naa',music_artist="Emiway Bantai", music_album="Machaynge",music_coverArt="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.mid-day.com%2Fimages%2F2019%2Fjan%2FEmiway-Rapper_d.jpg&f=1&nofb=1", music_file="Allare Nani Keshi     .mp3", music_length=10)
+        Artists.objects.create(
+            name='Anil', image='https://anilpoudyal.com.np/')
+        Musics.objects.create(music_title='Aama le sodhlin ni', music_coverArt="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.mid-day.com%2Fimages%2F2019%2Fjan%2FEmiway-Rapper_d.jpg&f=1&nofb=1",
+                              music_file="Aama le sodhlin ni     .mp3", music_length=12)
+        Distributors.objects.create(
+            name='OSR Digital', logo='https://osrdigital.com.np/')
+        Albums.objects.create(album_title='Machayange',
+                              album_logo="https://emiway.com/logo/")
 
-    def test_music_gets_adopted(self):
-        test1 = Music.objects.get(music_title="Main Hoon Na")
-        self.assertEqual(test1.music_album(), "Machaynge")
+    def testArtist(self):
+        testArtist = Artists.objects.get(name="Anil")
+        self.assertEqual(testArtist.name, "Anil")
+
+    def testMusic(self):
+        testMusic = Musics.objects.get(music_title="Aama le sodhlin ni")
+        self.assertEqual(testMusic.music_title, "Aama le sodhlin ni")
+
+    def testDistributors(self):
+        testDistributors = Distributors.objects.get(name="OSR Digital")
+        self.assertEqual(testDistributors.name, "OSR Digital")
+
+    def testAlbums(self):
+        testAlbums = Albums.objects.get(album_title="Machayange")
+        self.assertEqual(testAlbums.album_title, "Machayange")

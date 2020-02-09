@@ -1,12 +1,12 @@
 from django.test import TestCase
-from .models import Customers
+from django.contrib.auth.models import User
 # Create your tests here.
 
 
 class CustomersTestCase(TestCase):
     def setUp(self):
-        Customers.objects.create(f_name='Sunil', l_name="Rawal", email="sunil@gmail.com")
-                            
-    def test_costumers_gets_adopted(self):
-        test1 = Customers.objects.get(f_name="Sunil")
-        self.assertEqual(test1.email(), "sunil@gmail.com")
+        User.objects.create_user(username="anilpdl", password="anil123")
+
+    def testUser(self):
+        testUser = User.objects.get(username="anilpdl")
+        self.assertEqual(testUser.username, "anilpdl")
