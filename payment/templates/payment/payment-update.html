@@ -1,6 +1,9 @@
 <script src="https://js.stripe.com/v3/"></script>
-
-<form method="post" id="payment-form" action="/">
+<div class="container" style="width: 70%; margin: 0 auto;">
+{% if messages %}
+<p style="color: green; font-size: 16px; font-weight: 600;">Payment Successfully Received! It will take some time for processing. </p>
+{% endif %}
+<form method="post" id="payment-form" action="">
     {% csrf_token %}
     <div class="form-row">
         <label for="card-element">
@@ -16,9 +19,10 @@
 
     <button>Submit Payment</button>
 </form>
+</div>
 <script>
     // Create a Stripe client.
-    var stripe = Stripe("pk_test_g28NAqFNmGzhURBvvzJUcJ9d00LEtu3gqE");
+    var stripe = Stripe("pk_test_S8UZOGfz6CpgjTDI1Dhds5dd00SzqrLxI7");
 
     // Create an instance of Elements.
     var elements = stripe.elements();

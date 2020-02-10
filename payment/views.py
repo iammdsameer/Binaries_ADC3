@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
+from django.contrib import messages
 import stripe
 
 
@@ -20,7 +21,7 @@ def payment(request):
                 source=token
             )
             # User.objects.get(pk=pk).update(is_premium="True")
-            
+            messages.error(request, 'Payment Successfully Recieved.')
         except stripe.error.CardError as e:
             pass
     return render(request, 'payment/payment-update.html', {'publishKey': publishKey})

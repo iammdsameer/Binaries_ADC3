@@ -1,4 +1,4 @@
-{%extends 'base.html'%} {% block script%}
+{%extends 'base.html'%} {% block script %}
 <script>
     Stripe.setPublishableKey("{{ publishkey }}");
     function stripeResponseHandler(status, response) {
