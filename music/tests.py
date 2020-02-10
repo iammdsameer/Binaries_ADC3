@@ -18,7 +18,7 @@
 from django.test import TestCase
 from .models import Artists, Musics, Distributors, Albums, Genres
 
-
+#Creating Testcases for music
 class MusicTestCase(TestCase):
     def setUp(self):
         Artists.objects.create(name='Anil', image='https://anilpoudyal.com.np/')
@@ -28,10 +28,12 @@ class MusicTestCase(TestCase):
         Genres.objects.create(name='POP', genre_logo='https://c8.alamy.com/comp/DM6XWE/pop-music-party-abstract-colorful-waves-on-black-background-DM6XWE.jpg')
         Artists.objects.create(name="Emiway", image="https://yt3.ggpht.com/a/AGF-l78Lts4ZWANg_wjkRvABuN9zh99wXQAleYzsNw=s900-c-k-c0xffffffff-no-rj-mo")
 
+#Testing Artist
     def testArtist(self):
         testArtist = Artists.objects.get(name="Anil")
         self.assertEqual(testArtist.name, "Anil")
 
+#Tests of music name, distributors, albums, Genre of music
     def testMusic(self):
         testMusic = Musics.objects.get(music_title="Aama le sodhlin ni")
         self.assertEqual(testMusic.music_title, "Aama le sodhlin ni")
