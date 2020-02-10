@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from user.models import Customers
 from .decorators import alreadyPremium
-from user.decorators import unauthenticated
+from user.decorators import authenticated
 
 
 @alreadyPremium
-@unauthenticated
+@authenticated
 def payment(request):
     if request.method == "GET":
         return render(request, "payment/payment.html", context={})

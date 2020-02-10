@@ -105,7 +105,7 @@
                 &nbsp;&nbsp;&nbsp;
                 <form action="/delete/{{m.id}}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button style="color: red;" type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
             {%endif%}

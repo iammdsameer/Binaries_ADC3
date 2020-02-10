@@ -9,9 +9,10 @@ from django.contrib.auth.decorators import login_required
 from .decorators import admin
 from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from user.decorators import authenticated
 
 # Returns index page with list of added songs
-
+@authenticated
 def index(request):
     music = Musics.objects.all()
     if request.GET:
@@ -38,7 +39,7 @@ def upload(request, pk=0):
         form = UploadMusic(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect("/upload/")
 
 
 # delete added music authenticated users only
@@ -74,7 +75,7 @@ def addAlbums(request):
         form = AddAlbum(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/addAlbum/')
     form = AddAlbum()
     albums = Albums.objects.all()
     return render(request, "music/addAlbum.html", {"form": form, "albums": albums})
@@ -103,7 +104,7 @@ def addArtist(request):
         form = AddArtist(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/addArtist/')
     form = AddArtist()
     artist = Artists.objects.all()
     return render(request, "music/addArtist.html", {"form": form, "artist": artist})

@@ -9,7 +9,7 @@
         {% csrf_token %} {% load crispy_forms_tags %} {{ field.errors }}
         {{form|crispy }}
         <br />
-        <button type="submit">Submit</button>
+        <button style="color: red;" type="submit">Submit</button>
     </form>
 </div>
 {%else%}

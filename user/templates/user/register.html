@@ -3,7 +3,7 @@
     <p style="color: red;">{{error}}</p>
     <form action="" method="POST">
         {% csrf_token %} {{form|crispy}} {{cform|crispy}}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button style="color: red;" type="submit" class="btn btn-primary">Submit</button>
     </form>
     <div class="text-center">
         Already have an account? <a href="/user/login">Sign in</a>
