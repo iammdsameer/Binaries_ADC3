@@ -1,11 +1,15 @@
 {%extends 'base.html'%} {% block content %} {% if user.is_authenticated%}
+<br />
+<p>Hey <b>{{user.first_name}},</b></p>
 
-<p>Hey <b>{{user.username}},</b></p>
 <small>You're Logged In</small>
-<form method="POST" action="payment/">
-    {% csrf_token %}
-    <button type="submit" value="{{user.id}}">Convert to Premium</button>
-</form>
+
+<!-- {% csrf_token %} -->
+{%if premium or request.user.is_superuser %}
+<h5 style="color: gold;">!!! Premium User !!!</h5>
+{% else %}
+<a href="/payment/"> <button value="">Convert to Premium</button></a>
+{%endif%}
 <br />
 <form method="POST" action="../logout/">
     {% csrf_token %}
@@ -48,8 +52,11 @@
             <th>Artist</th>
             <th>Coverart</th>
             <th>Play Audio</th>
+            {%if premium or request.user.is_superuser %}
             <th>Download Audio</th>
-            {% if request.user.is_superuser %}
+            {% else %}
+            <span style="color: brown;">Become Premium to download</span>
+            {%endif%} {% if request.user.is_superuser %}
             <th>Actions</th>
             {%endif%}
         </tr>
@@ -86,7 +93,11 @@
             </td>
             <td>
                 <!-- Download song from here -->
+                {%if premium or request.user.is_superuser %}
                 <a href="{{ m.music_file.url }}" download> Download </a>
+                {% else %}
+                <span style="color: brown;">Become Premium to download</span>
+                {%endif%}
             </td>
             {% if request.user.is_superuser %}
             <td>

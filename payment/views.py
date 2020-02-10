@@ -1,27 +1,24 @@
-from django.shortcuts import render
-from django.conf import settings
-from django.contrib import messages
-import stripe
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from user.models import Customers
+from .decorators import alreadyPremium
+from user.decorators import unauthenticated
 
 
-
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
-
-# Create your views here.
+@alreadyPremium
+@unauthenticated
 def payment(request):
-    publishKey = settings.STRIPE_PUBLISHABLE_KEY
-    if request.method == "POST":
-        token = request.POST['stripeToken']
-        try:
-            charge = stripe.Charge.create(
-                amount=999, # Amount in dollars and cents
-                currency='usd',
-                description='Example charge',
-                source=token
-            )
-            # User.objects.get(pk=pk).update(is_premium="True")
-            messages.error(request, 'Payment Successfully Recieved.')
-        except stripe.error.CardError as e:
-            pass
-    return render(request, 'payment/payment-update.html', {'publishKey': publishKey})
+    if request.method == "GET":
+        return render(request, "payment/payment.html", context={})
+    else:
+        cname = request.POST["cname"]
+        cvv = request.POST["cvv"]
+        user = request.user.id
+        customer = Customers.objects.get(user=user)
+        pk = customer.id
+        if cname == "binaries" and cvv == '1212':
+            Customers.objects.filter(pk=pk).update(is_premium=True)
+
+            return redirect('/user/profile/')
+        else:
+            return HttpResponse("Payment Unsuccessfull!!!")

@@ -7,72 +7,77 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated
+from .forms import registerform, customerform
 
 
-#user register if already logged in redirects to  home page
+# user register if already logged in redirects to  home page
 @unauthenticated
 def register(request):
-    
-    if request.method =='POST':
-        if request.POST['password1']==request.POST['password2']:
-            try:
-                user = User.objects.get(username=request.POST['username'])
-                return render(request,'user/register.html',{'error':'Error: Username is already taken'})
-            except User.DoesNotExist:
-                f_name = request.POST['first_name'].capitalize()
-                l_name = request.POST['last_name'].capitalize()
-                m_name = request.POST['middle_name'].capitalize()
-                dob = request.POST['dob']
-                phone = request.POST['phone']
-                country = request.POST['country']
-                gender = request.POST['gender']
-                username = request.POST['username']
-                email = request.POST['email']
-                password1 = request.POST['password1']
-                user = User.objects.create_user(username=username, password=password1)
-                
-                customers = Customers(email=email,f_name=f_name,l_name=l_name,m_name=m_name,dob=dob,phone=phone,gender = gender, country=country)
-                
-                auth.login(request,user)
-                return redirect('user:profile')
-        else:
-             return render(request, "user/register.html", context={'error':'Error: Password or Username Do not match'})
+    if request.method == 'POST':
+        uform = registerform(request.POST)
+        cform = customerform(request.POST)
+        try:
+            # checks for any user existance with same username
+            user = User.objects.get(username=request.POST['username'])
+            return render(request, 'user/register.html', {'error': 'Error: Username is already taken', 'form': uform, 'cform': cform})
+        except User.DoesNotExist:
+            # checks for form validation
+            if uform.is_valid() and cform.is_valid():
+                user = uform.save()
+                # holds with data before another save is called
+                customer = cform.save(commit=False)
+                customer.user = user
+                customer.save()
+                # gets data from the form
+                username = uform.cleaned_data.get('username')
+                password = uform.cleaned_data.get('password')
+                # authentication
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect("/user/profile/")
 
     else:
-        return render(request, "user/register.html", context={})
-   
-#user login if already logged in redirects to  home page
+        # django user
+        uform = registerform()
+        # customer model user
+        cform = customerform()
+    context = {'form': uform, 'cform': cform}
+    return render(request, "user/register.html", context)
+
+# user login if already logged in redirects to  home page
 @unauthenticated
 def user_login(request):
-    
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect("user:profile")
+            return redirect("/")
         else:
-            return render(request, "user/login.html", {"error":"You got your password or username wronged!!!"})
+            return render(request, "user/login.html", {"error": "You got your password or username wronged!!!"})
     else:
-        
+
         return render(request, "user/login.html")
 
 
-#log out function -->> redirects to index
+# log out function -->> redirects to index
 def user_logout(request):
     if request.method == "POST":
         logout(request)
         return redirect("music:homepage")
 
-#user profile
+# user profile
+
+
 @login_required(login_url='/user/login/')
 def profile(request):
     music = Musics.objects.all()
-    # context['user'] = request.user
-    if request.POST:
-
-        customer_id = request.POST["cid"]
-        Customers.objects.filter(id=cid).update(is_premium="True")
-
-    return render(request, "user/profile.html", context={"musics": music})
+    if request.user.is_superuser == False:
+        user = request.user.id
+        customer = Customers.objects.get(user=user)
+        premium = customer.is_premium
+        return render(request, "user/profile.html", context={"musics": music, 'premium': premium})
+    else:
+        return render(request, "user/profile.html", context={"musics": music, 'premium': True})
